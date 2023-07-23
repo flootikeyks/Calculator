@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Calculator</title>
+  <style>
+    /* Basic styling for the calculator */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    .calculator {
+      width: 300px;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="button"] {
+      width: 60px;
+      height: 40px;
+      margin: 5px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="result" disabled>
+    <br>
+    <input type="button" value="7" onclick="appendNumber('7')">
+    <input type="button" value="8" onclick="appendNumber('8')">
+    <input type="button" value="9" onclick="appendNumber('9')">
+    <input type="button" value="/" onclick="appendOperator('/')">
+    <br>
+    <input type="button" value="4" onclick="appendNumber('4')">
+    <input type="button" value="5" onclick="appendNumber('5')">
+    <input type="button" value="6" onclick="appendNumber('6')">
+    <input type="button" value="*" onclick="appendOperator('*')">
+    <br>
+    <input type="button" value="1" onclick="appendNumber('1')">
+    <input type="button" value="2" onclick="appendNumber('2')">
+    <input type="button" value="3" onclick="appendNumber('3')">
+    <input type="button" value="-" onclick="appendOperator('-')">
+    <br>
+    <input type="button" value="0" onclick="appendNumber('0')">
+    <input type="button" value="." onclick="appendNumber('.')">
+    <input type="button" value="=" onclick="calculate()">
+    <input type="button" value="+" onclick="appendOperator('+')">
+    <br>
+    <input type="button" value="Clear" onclick="clearResult()">
+  </div>
+
+  <script>
+    let currentResult = '';
+
+    // Function to display the input numbers and operators
+    function appendNumber(number) {
+      currentResult += number;
+      document.getElementById('result').value = currentResult;
+    }
+
+    // Function to append an operator to the current result
+    function appendOperator(operator) {
+      if (currentResult !== '' && '+-*/'.indexOf(currentResult.charAt(currentResult.length - 1)) === -1) {
+        currentResult += operator;
+        document.getElementById('result').value = currentResult;
+      }
+    }
+
+    // Function to perform the calculation
+    function calculate() {
+      try {
+        currentResult = eval(currentResult);
+        document.getElementById('result').value = currentResult;
+      } catch (error) {
+        document.getElementById('result').value = 'Error';
+      }
+    }
+
+    // Function to clear the result
+    function clearResult() {
+      currentResult = '';
+      document.getElementById('result').value = '';
+    }
+  </script>
+</body>
+</html>
